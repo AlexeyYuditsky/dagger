@@ -1,16 +1,20 @@
 package com.alexeyyuditsky.dagger
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.alexeyyuditsky.dagger.core.log
+import com.alexeyyuditsky.dagger.simpleExample.Computer
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
+
+    @Inject
+    lateinit var computer: Computer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        appComponent.inject(this)
+        log(computer)
     }
 
 }
