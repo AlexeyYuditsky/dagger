@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace = "com.alexeyyuditsky.dagger"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.alexeyyuditsky.dagger"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -34,6 +34,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -42,6 +45,10 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+
+    implementation(libs.coroutines)
+    implementation(libs.fragment)
+    implementation(libs.retrofit)
 
     implementation(libs.dagger.android)
     kapt(libs.dagger.compiler)

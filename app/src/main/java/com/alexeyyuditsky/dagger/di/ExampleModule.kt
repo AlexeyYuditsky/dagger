@@ -1,24 +1,14 @@
-package com.alexeyyuditsky.dagger
+package com.alexeyyuditsky.dagger.di
 
 import com.alexeyyuditsky.dagger.simpleExample.Computer
 import com.alexeyyuditsky.dagger.simpleExample.Motherboard
 import com.alexeyyuditsky.dagger.simpleExample.Processor
 import com.alexeyyuditsky.dagger.simpleExample.RAM
-import dagger.Component
 import dagger.Module
 import dagger.Provides
 
-@Component(modules = [AppModule::class])
-interface AppComponent {
-
-    fun inject(activity: MainActivity)
-
-    val computer: Computer
-
-}
-
 @Module
-class AppModule {
+class ExampleModule {
 
     @Provides
     fun provideProcessor(): Processor {

@@ -2,26 +2,22 @@ package com.alexeyyuditsky.dagger
 
 import android.app.Application
 import android.content.Context
+import com.alexeyyuditsky.dagger.di.AppComponent
+import com.alexeyyuditsky.dagger.di.DaggerAppComponent
 
 class App : Application() {
 
     lateinit var appComponent: AppComponent
+        private set
 
     override fun onCreate() {
         super.onCreate()
         appComponent = DaggerAppComponent.create()
     }
-
 }
 
-@Suppress("RecursivePropertyAccessor")
 val Context.appComponent: AppComponent
     get() = when (this) {
-        is App -> {
-            this.appComponent
-        }
-
-        else -> {
-            this.applicationContext.appComponent
-        }
+        is App -> appComponent
+        else -> applicationContext.appComponent
     }
