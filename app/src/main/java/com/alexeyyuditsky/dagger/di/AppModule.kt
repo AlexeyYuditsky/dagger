@@ -1,6 +1,9 @@
 package com.alexeyyuditsky.dagger.di
 
+import android.content.Context
+import com.alexeyyuditsky.dagger.core.ResourceManager
 import dagger.Module
+import dagger.Provides
 
 @Module(
     includes = [
@@ -8,4 +11,12 @@ import dagger.Module
         NetworkModule::class
     ]
 )
-class AppModule
+class AppModule {
+
+    @Provides
+    @AppScope
+    fun provideResourceManager(context: Context): ResourceManager {
+        return ResourceManager.Base(context)
+    }
+
+}

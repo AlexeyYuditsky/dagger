@@ -3,6 +3,7 @@ package com.alexeyyuditsky.dagger.presentation
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
@@ -24,7 +25,6 @@ class NewsDetailsFragment :
     private val newsId: String by stringArgs(ARG_NEWS_ID)
     private val viewModel by viewModels<NewsDetailsViewModel> { factory.create(newsId) }
 
-    // Lazy и Provider не работаю с зависимостями, которые используют Assisted Inject
     @Inject
     lateinit var factory: NewsDetailsViewModelFactory.Factory
 
@@ -43,21 +43,14 @@ class NewsDetailsFragment :
         }
     }
 
-    private fun updateUi(news: News) {
-        if (view == null) return
-        with(binding) {
-            title.text = news.title
-            body.text = news.body
-        }
+    private fun updateUi(news: News) = with(binding) {
+        title.text = news.title
+        body.text = news.body
     }
 
     companion object {
         private const val ARG_NEWS_ID = "news_id"
 
-        fun makeArgs(newsId: String): Bundle {
-            return Bundle(1).apply {
-                putString(ARG_NEWS_ID, newsId)
-            }
-        }
+        fun makeArgs(newsId: String): Bundle = bundleOf(ARG_NEWS_ID to newsId)
     }
 }

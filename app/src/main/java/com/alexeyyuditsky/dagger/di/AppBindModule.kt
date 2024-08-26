@@ -9,6 +9,6 @@ import dagger.Module
 interface AppBindModule {
 
     @Binds
-    fun provideNewsRepository(newsRepositoryImpl: NewsRepositoryImpl): NewsRepository
+    fun bindNewsRepository(newsRepositoryImpl: NewsRepositoryImpl): NewsRepository
 
 }

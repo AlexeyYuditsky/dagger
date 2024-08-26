@@ -7,17 +7,17 @@ import com.alexeyyuditsky.dagger.di.DaggerAppComponent
 
 class App : Application() {
 
-    lateinit var appComponent: AppComponent
-        private set
-
-    override fun onCreate() {
-        super.onCreate()
-        appComponent = DaggerAppComponent.create()
+    val appComponent by lazy(LazyThreadSafetyMode.NONE) {
+        DaggerAppComponent.builder()
+            .context(this)
+            .build()
     }
+
 }
 
+@Suppress("RecursivePropertyAccessor")
 val Context.appComponent: AppComponent
     get() = when (this) {
-        is App -> appComponent
-        else -> applicationContext.appComponent
+        is App -> this.appComponent
+        else -> this.applicationContext.appComponent
     }

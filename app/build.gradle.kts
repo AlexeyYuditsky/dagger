@@ -49,6 +49,8 @@ dependencies {
     implementation(libs.coroutines)
     implementation(libs.fragment)
     implementation(libs.retrofit)
+    implementation(libs.moshi)
+    kapt(libs.moshi.codegen)
 
     implementation(libs.dagger.android)
     kapt(libs.dagger.compiler)

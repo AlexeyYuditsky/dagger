@@ -4,25 +4,31 @@ import com.alexeyyuditsky.dagger.data.NewsService
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.create
-import javax.inject.Named
 
 @Module
 class NetworkModule {
 
     @Provides
-    @Named("prod")
-    fun provideProductionNewsService(): NewsService {
+    fun provideMoshiConverterFactory(): MoshiConverterFactory {
+        return MoshiConverterFactory.create()
+    }
+
+    @Provides
+    fun provideProductionNewsService(moshiConverterFactory: MoshiConverterFactory): NewsService {
         return Retrofit.Builder()
+            .addConverterFactory(moshiConverterFactory)
             .baseUrl("https://androidbrodcast.dev")
             .build()
             .create()
     }
 
     @Provides
-    @Named("stage")
-    fun provideStageNewsService(): NewsService {
+    @Stage
+    fun provideStageNewsService(moshiConverterFactory: MoshiConverterFactory): NewsService {
         return Retrofit.Builder()
+            .addConverterFactory(moshiConverterFactory)
             .baseUrl("https://stage.androidbrodcast.dev")
             .build()
             .create()

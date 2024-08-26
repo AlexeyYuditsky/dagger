@@ -1,8 +1,6 @@
 package com.alexeyyuditsky.dagger.util
 
-import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import kotlin.properties.ReadOnlyProperty
 
 fun stringArgs(key: String): ReadOnlyProperty<Fragment, String> {
@@ -11,8 +9,4 @@ fun stringArgs(key: String): ReadOnlyProperty<Fragment, String> {
         require(args.containsKey(key)) { "Arguments don't contain key '$key'" }
         requireNotNull(args.getString(key))
     }
-}
-
-fun FragmentManager.isFragmentContainerEmpty(@IdRes id: Int): Boolean {
-    return findFragmentById(id) == null
 }
